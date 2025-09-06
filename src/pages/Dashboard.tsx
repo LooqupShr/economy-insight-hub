@@ -167,57 +167,167 @@ export const Dashboard = () => {
         </Card>
       </div>
 
-      {/* Charts Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* GDP Contribution by Sector */}
-        <Card>
-          <CardHeader>
-            <CardTitle>GDP Contribution by Sector</CardTitle>
+      {/* Sector Analysis Sections */}
+      <div className="space-y-6">
+        {/* Banking Section */}
+        <Card className="border-finance-primary/20">
+          <CardHeader className="border-b border-finance-primary/10">
+            <CardTitle className="flex items-center gap-2 text-finance-primary">
+              <Building className="h-5 w-5" />
+              Banking
+            </CardTitle>
           </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie
-                  data={sectorData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={60}
-                  outerRadius={120}
-                  paddingAngle={2}
-                  dataKey="value"
-                >
-                  {sectorData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip formatter={(value) => [`${value}%`, 'GDP Share']} />
-              </PieChart>
-            </ResponsiveContainer>
+          <CardContent className="p-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* GDP Contribution Pie Chart */}
+              <div>
+                <h4 className="text-sm font-medium text-muted-foreground mb-4">GDP Contribution by Sector</h4>
+                <ResponsiveContainer width="100%" height={280}>
+                  <PieChart>
+                    <Pie
+                      data={sectorData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={50}
+                      outerRadius={100}
+                      paddingAngle={2}
+                      dataKey="value"
+                    >
+                      {sectorData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.color} />
+                      ))}
+                    </Pie>
+                    <Tooltip formatter={(value) => [`${value}%`, 'GDP Share']} />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+              
+              {/* Quarterly Performance Bar Chart */}
+              <div>
+                <h4 className="text-sm font-medium text-muted-foreground mb-4">Quarterly Performance (SAR Billions)</h4>
+                <ResponsiveContainer width="100%" height={280}>
+                  <BarChart data={quarterlyData}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                    <XAxis 
+                      dataKey="quarter" 
+                      tick={{ fontSize: 10 }}
+                      stroke="hsl(var(--muted-foreground))"
+                    />
+                    <YAxis stroke="hsl(var(--muted-foreground))" tick={{ fontSize: 10 }} />
+                    <Tooltip />
+                    <Bar dataKey="banking" fill="hsl(var(--finance-primary))" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
           </CardContent>
         </Card>
 
-        {/* Quarterly Performance Trends */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Quarterly Performance (SAR Billions)</CardTitle>
+        {/* Asset Management Section */}
+        <Card className="border-finance-secondary/20">
+          <CardHeader className="border-b border-finance-secondary/10">
+            <CardTitle className="flex items-center gap-2 text-finance-secondary">
+              <TrendingUp className="h-5 w-5" />
+              Asset Management
+            </CardTitle>
           </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={quarterlyData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                <XAxis 
-                  dataKey="quarter" 
-                  tick={{ fontSize: 12 }}
-                  stroke="hsl(var(--muted-foreground))"
-                />
-                <YAxis stroke="hsl(var(--muted-foreground))" />
-                <Tooltip />
-                <Bar dataKey="banking" stackId="a" fill="hsl(var(--finance-primary))" />
-                <Bar dataKey="assetMgmt" stackId="a" fill="hsl(var(--finance-secondary))" />
-                <Bar dataKey="capitalMarkets" stackId="a" fill="hsl(var(--finance-accent))" />
-                <Bar dataKey="insurance" stackId="a" fill="hsl(var(--finance-warning))" />
-              </BarChart>
-            </ResponsiveContainer>
+          <CardContent className="p-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* GDP Contribution Pie Chart */}
+              <div>
+                <h4 className="text-sm font-medium text-muted-foreground mb-4">GDP Contribution by Sector</h4>
+                <ResponsiveContainer width="100%" height={280}>
+                  <PieChart>
+                    <Pie
+                      data={sectorData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={50}
+                      outerRadius={100}
+                      paddingAngle={2}
+                      dataKey="value"
+                    >
+                      {sectorData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.color} />
+                      ))}
+                    </Pie>
+                    <Tooltip formatter={(value) => [`${value}%`, 'GDP Share']} />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+              
+              {/* Quarterly Performance Bar Chart */}
+              <div>
+                <h4 className="text-sm font-medium text-muted-foreground mb-4">Quarterly Performance (SAR Billions)</h4>
+                <ResponsiveContainer width="100%" height={280}>
+                  <BarChart data={quarterlyData}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                    <XAxis 
+                      dataKey="quarter" 
+                      tick={{ fontSize: 10 }}
+                      stroke="hsl(var(--muted-foreground))"
+                    />
+                    <YAxis stroke="hsl(var(--muted-foreground))" tick={{ fontSize: 10 }} />
+                    <Tooltip />
+                    <Bar dataKey="assetMgmt" fill="hsl(var(--finance-secondary))" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Insurance Section */}
+        <Card className="border-finance-warning/20">
+          <CardHeader className="border-b border-finance-warning/10">
+            <CardTitle className="flex items-center gap-2 text-finance-warning">
+              <Shield className="h-5 w-5" />
+              Insurance
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* GDP Contribution Pie Chart */}
+              <div>
+                <h4 className="text-sm font-medium text-muted-foreground mb-4">GDP Contribution by Sector</h4>
+                <ResponsiveContainer width="100%" height={280}>
+                  <PieChart>
+                    <Pie
+                      data={sectorData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={50}
+                      outerRadius={100}
+                      paddingAngle={2}
+                      dataKey="value"
+                    >
+                      {sectorData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.color} />
+                      ))}
+                    </Pie>
+                    <Tooltip formatter={(value) => [`${value}%`, 'GDP Share']} />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+              
+              {/* Quarterly Performance Bar Chart */}
+              <div>
+                <h4 className="text-sm font-medium text-muted-foreground mb-4">Quarterly Performance (SAR Billions)</h4>
+                <ResponsiveContainer width="100%" height={280}>
+                  <BarChart data={quarterlyData}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                    <XAxis 
+                      dataKey="quarter" 
+                      tick={{ fontSize: 10 }}
+                      stroke="hsl(var(--muted-foreground))"
+                    />
+                    <YAxis stroke="hsl(var(--muted-foreground))" tick={{ fontSize: 10 }} />
+                    <Tooltip />
+                    <Bar dataKey="insurance" fill="hsl(var(--finance-warning))" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
           </CardContent>
         </Card>
       </div>
